@@ -8,9 +8,11 @@ class BybitKlineFetcher:
         self.end_time = int(datetime.now().timestamp() * 1000)
         self.start_time = int((datetime.now() - timedelta(days=7)).timestamp() * 1000)
 
+
     def set_time_period(self, start_days_ago=7):
         self.end_time = int(datetime.now().timestamp() * 1000)
         self.start_time = int((datetime.now() - timedelta(days=start_days_ago)).timestamp() * 1000)
+
 
     def get_kline_data(self, interval='D'):
         response = self.session.get_kline(
@@ -21,6 +23,7 @@ class BybitKlineFetcher:
             end=self.end_time
         )
         return response
+
 
     def preprocess_kline_data(self, kline_data):
         timestamps = [int(item[0]) for item in kline_data['result']['list']]

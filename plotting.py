@@ -41,16 +41,29 @@ class Plotter:
             add_plot.append(mpf.make_addplot(df['+DI'], panel=1, color='green', ylabel='+DI'))
             add_plot.append(mpf.make_addplot(df['-DI'], panel=1, color='orange', ylabel='-DI'))
 
+        elif indicator_type == "ao":
+            df['AO'] = Indicators.calculate_ao(df['High'], df['Low'])
+            recommendation = Indicators.ao_recommendation(df['AO'].iloc[-1], df['AO'].diff().iloc[-1])
+            print(f"AO values:\n{df[['Close', 'AO']].tail(10)}")
+            print(f"Recommendation: {recommendation}")
+            
+            # Генерация цветов для гистограммы AO
+            colors = ['green' if val > 0 else 'red' for val in df['AO']]
+            
+            # Добавление AO с цветами
+            add_plot.append(
+                mpf.make_addplot(df['AO'], panel=1, type='bar', color=colors, ylabel='AO')
+            )
 
-        mpf.plot(df,
-                 type='candle',
-                 volume=True,
-                 style='charles',
-                 title=f"{self.symbol} Candlestick Chart with {indicator_type.upper()}",
-                 ylabel='Price (USD)',
-                 ylabel_lower='Volume',
-                 addplot=add_plot,
-                 savefig=dict(fname=f'candlestick_with_{indicator_type}_chart.png', dpi=300),
-                 figscale=1.5,
-                 figratio=(16, 9))
+            mpf.plot(df,
+                    type='candle',
+                    volume=False,
+                    style='charles',
+                    title=f"{self.symbol} Candlestick Chart with {indicator_type.upper()}",
+                    ylabel='Price (USD)',
+                    addplot=add_plot,
+                    savefig=dict(fname=f'candlestick_with_{indicator_type}_chart.png', dpi=300),
+                    figscale=1.5,
+                    figratio=(16, 9))
+
         return recommendation

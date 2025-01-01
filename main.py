@@ -5,7 +5,7 @@ from plotting import Plotter
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Plot specific indicator chart.")
-    parser.add_argument("indicator", choices=["rsi", "stochastic", "cci", "adx"], help="The type of indicator to plot.")
+    parser.add_argument("indicator", choices=["rsi", "stochastic", "cci", "adx", "ao"], help="The type of indicator to plot.")
     args = parser.parse_args()
 
     session = HTTP(testnet=False)
