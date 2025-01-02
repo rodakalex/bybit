@@ -14,11 +14,11 @@ class BybitKlineFetcher:
         self.start_time = int((datetime.now() - timedelta(days=start_days_ago)).timestamp() * 1000)
 
 
-    def get_kline_data(self, interval='D'):
+    def get_kline_data(self, interval='1'):
         response = self.session.get_kline(
             category="inverse",
             symbol=self.symbol,
-            interval=interval,
+            interval=interval,  # Установлен интервал 1 минута
             start=self.start_time,
             end=self.end_time
         )

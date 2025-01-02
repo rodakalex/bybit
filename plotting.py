@@ -55,15 +55,15 @@ class Plotter:
                 mpf.make_addplot(df['AO'], panel=1, type='bar', color=colors, ylabel='AO')
             )
 
-            mpf.plot(df,
-                    type='candle',
-                    volume=False,
-                    style='charles',
-                    title=f"{self.symbol} Candlestick Chart with {indicator_type.upper()}",
-                    ylabel='Price (USD)',
-                    addplot=add_plot,
-                    savefig=dict(fname=f'candlestick_with_{indicator_type}_chart.png', dpi=300),
-                    figscale=1.5,
-                    figratio=(16, 9))
+        mpf.plot(df,
+                type='candle',
+                volume=False,
+                style='charles',
+                title=f"{self.symbol} Candlestick Chart with {indicator_type.upper()}",
+                ylabel='Price (USD)',
+                addplot=add_plot,
+                savefig=dict(fname=f'candlestick_with_{indicator_type}_chart.png', dpi=300),
+                figscale=1.5,
+                figratio=(16, 9))
 
         return recommendation

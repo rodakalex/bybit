@@ -102,6 +102,19 @@ class Indicators:
         return "Neutral"
 
     @staticmethod
+    def rsi_recommendation(rsi):
+        if rsi < 30:
+            return "Активно покупать"
+        elif 30 <= rsi < 40:
+            return "Покупать"
+        elif 40 <= rsi <= 60:
+            return "Нейтрально"
+        elif 60 < rsi <= 70:
+            return "Продавать"
+        else:  # rsi > 70
+            return "Активно продавать"
+
+    @staticmethod
     def calculate_rsi(close_prices, period=14):
         delta = close_prices.diff()
         gain = delta.where(delta > 0, 0)
@@ -116,6 +129,7 @@ class Indicators:
         rsi = rsi.where(avg_gain != 0, 0)
 
         return rsi
+
 
     @staticmethod
     def calculate_stochastic(close_prices, high_prices, low_prices, period_k=14, smooth_k=1, period_d=3):
