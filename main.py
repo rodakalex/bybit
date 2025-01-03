@@ -22,7 +22,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Plot specific indicator chart.")
     parser.add_argument("indicator", choices=["rsi", "stochastic", "cci", "adx", "ao"], help="The type of indicator to plot.")
     parser.add_argument("--symbol", default="BTCUSD", help="The trading pair symbol (default: BTCUSD).")
-    parser.add_argument("--timeframe", choices=INTERVAL_MAPPING.keys(), default="1m", help="Choose timeframe (default: 1m).")
+    parser.add_argument("--timeframe", choices=INTERVAL_MAPPING.keys(), default="1d", help="Choose timeframe (default: 1d).")
     args = parser.parse_args()
 
     # Выбор временного интервала и диапазона
